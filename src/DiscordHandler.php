@@ -34,8 +34,8 @@ class DiscordHandler extends AbstractProcessingHandler
         $this->name = $name;
         $this->subname = $subname;
         $this->guzzle = new \GuzzleHttp\Client();
-		$this->webhook = $webhook;
-		$this->roleId = $roleId;
+	$this->webhook = trim($webhook);
+	$this->roleId = $roleId;
         parent::__construct($level, $bubble);
     }
 
@@ -66,9 +66,15 @@ class DiscordHandler extends AbstractProcessingHandler
 
 
         // Send it to discord
-        $this->guzzle->request('POST', $this->webhook, [
-            RequestOptions::JSON => $log,
-        ]);
+	try
+	{
+		$this->guzzle->request('POST', $this->webhook, [
+		    RequestOptions::JSON => $log,
+		]);
+	}
+	catch(Exception $ex)
+	{
+	}
     }
 }
 
