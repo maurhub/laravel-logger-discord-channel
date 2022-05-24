@@ -72,7 +72,7 @@ class DiscordHandler extends AbstractProcessingHandler
 		    RequestOptions::JSON => $log,
 		]);
 	}
-	catch(Exception $ex)
+	catch(\Exception $ex)
 	{
 	}
     }
